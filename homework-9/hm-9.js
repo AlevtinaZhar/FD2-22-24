@@ -3,48 +3,52 @@ document.addEventListener("DOMContentLoaded", () => {
   const addTaskButton = document.getElementById("addTaskButton");
   const taskList = document.getElementById("taskList");
 
-  // Функция для добавления новой задачи
-  function addTask() {
+  /**
+   * Добавляет новую задачу в список задач.
+   * Создает элемент списка с текстом задачи и кнопками для редактирования, удаления и выполнения.
+   */
+  const addTask = () => {
     const taskText = taskInput.value.trim();
-    if (taskText === "") return;
+    if (!taskText) return; // Не добавлять задачу, если текст пустой
 
     const li = document.createElement("li");
     li.className = "task-item";
     li.innerHTML = `
-            <input type="text" value="${taskText}" readonly />
-            <button class="editButton">Edit</button>
-            <button class="deleteButton">Delete</button>
-            <button class="completeButton">Complete</button>
-        `;
-    taskList.appendChild(li);
-    taskInput.value = "";
-  }
+                <input type="text" value="${taskText}" readonly />
+                <button class="editButton">Edit</button>
+                <button class="deleteButton">Delete</button>
+                <button class="completeButton">Complete</button>
+            `;
+    taskList.appendChild(li); // Добавляем элемент в список
+    taskInput.value = ""; // Очищаем поле ввода
+  };
 
-  // Добавляем задачу при нажатии кнопки
-  addTaskButton.addEventListener("click", addTask);
+  addTaskButton.addEventListener("click", addTask); // Добавление задачи по нажатию на кнопку
 
-  // Делегирование событий на родительском элементе
+  /**
+   * Обрабатывает клики по элементам списка задач.
+   * Позволяет редактировать, удалять или отмечать задачи как выполненные.
+   */
   taskList.addEventListener("click", (event) => {
     const target = event.target;
     const taskItem = target.closest(".task-item");
+    if (!taskItem) return; // Игнорировать клики вне элементов задачи
 
-    if (!taskItem) return;
+    const input = taskItem.querySelector("input");
 
-    if (target.classList.contains("deleteButton")) {
-      taskItem.remove();
-    } else if (target.classList.contains("editButton")) {
-      const input = taskItem.querySelector("input");
+    if (target.matches(".deleteButton")) {
+      taskItem.remove(); // Удаление задачи
+    } else if (target.matches(".editButton")) {
       if (input.hasAttribute("readonly")) {
-        input.removeAttribute("readonly");
+        input.removeAttribute("readonly"); // Разрешить редактирование
         input.focus();
-        target.textContent = "Save";
+        target.textContent = "Save"; // Изменить текст кнопки на "Сохранить"
       } else {
-        input.setAttribute("readonly", true);
-        target.textContent = "Edit";
+        input.setAttribute("readonly", true); // Сохранить изменения
+        target.textContent = "Edit"; // Изменить текст кнопки на "Редактировать"
       }
-    } else if (target.classList.contains("completeButton")) {
-      const input = taskItem.querySelector("input");
-      input.classList.toggle("completed");
+    } else if (target.matches(".completeButton")) {
+      input.classList.toggle("completed"); // Отметить задачу как выполненную/невыполненную
     }
   });
 });

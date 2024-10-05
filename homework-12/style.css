@@ -1,0 +1,84 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e9ecef;
+    margin: 2px;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #343a40;
+}
+
+input[type="text"] {
+    width: calc(100% - 130px);
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom:10px ;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button.add {
+    background: #28a745;
+    color: white;
+}
+
+button.edit {
+    background: #007bff;
+    color: white;
+    margin-right: 5px;
+}
+
+button.delete {
+    background: #dc3545;
+    color: white;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #f8f9fa;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+li:hover {
+    transform: scale(1.02);
+}
+
+li button {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
